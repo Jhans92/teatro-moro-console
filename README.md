@@ -1,0 +1,24 @@
+Teatro Moro – Console App (Java 17/18)
+
+Aplicación de consola desarrollada en Java para la gestión completa de eventos, clientes y ventas de entradas del Teatro Moro. Está diseñada para funcionar en entorno terminal, con una interfaz ASCII robusta, intuitiva y personalizable que permite visualizar planos de asientos, realizar ventas controladas, aplicar descuentos automáticos y mantener una estructura de datos ordenada. Su objetivo es ofrecer una arquitectura clara, validaciones sólidas y una experiencia de usuario fluida en modo texto.
+
+El sistema incluye un plano de 8 filas (A–H) y 12 columnas (1–12), totalizando 96 asientos disponibles por evento. Cada asiento puede ser vendido, reservado o liberado, garantizando que no existan duplicaciones ni ventas cruzadas. Cada transacción de venta está limitada a un máximo de seis asientos por cliente para asegurar un control preciso. Los descuentos se aplican automáticamente según el tipo de cliente: 10% para estudiantes, 15% para tercera edad y sin descuento para el tipo general.
+
+El menú principal contiene todas las operaciones disponibles, organizadas de forma clara y numerada para facilitar la navegación: ver plano de asientos, vender entradas, gestionar clientes, gestionar eventos, generar reportes, ejecutar pruebas rápidas y salir del sistema. Además, dispone de una opción oculta (tecla 7) que permite activar o desactivar los colores ANSI o cambiar entre modo Unicode/ASCII, lo que mejora la compatibilidad con distintos entornos de consola o configuraciones del sistema operativo.
+
+La gestión de clientes permite agregar, listar, modificar y eliminar registros, además de contar con una función de “compactar” que reorganiza los datos eliminando espacios vacíos generados por eliminaciones previas. La gestión de eventos ofrece opciones para crear, modificar, renombrar o eliminar eventos, siempre que no existan ventas asociadas, así como la posibilidad de ajustar precios. Los reportes proporcionan información sobre ocupación, asientos libres y ventas realizadas. El sistema trabaja íntegramente en memoria utilizando estructuras validadas para mantener la coherencia de los datos.
+
+La estructura del proyecto se organiza en la carpeta src/app/, donde se encuentra el archivo principal MainTeatroMoro.java, junto a la carpeta nbproject/ con la configuración de NetBeans, el archivo build.xml para la automatización con Ant, el manifest.mf, y las carpetas auxiliares build/ y test/ para compilación y pruebas. El proyecto puede ejecutarse directamente desde NetBeans con la opción “Run”, o mediante línea de comandos utilizando las instrucciones:
+javac -d out src/app/MainTeatroMoro.java
+java -cp out app.MainTeatroMoro
+En caso de visualizar caracteres incorrectos, puede ejecutarse con el parámetro -Dfile.encoding=UTF-8 o presionar la tecla 7 dentro del programa.
+
+El flujo de uso típico consiste en iniciar el sistema, seleccionar “Ver plano de asientos” para observar el estado actual, luego “Vender entradas” para elegir un cliente y un evento, seleccionar los asientos mediante etiquetas (por ejemplo, A3, A4 o rangos como A3-A6) o identificadores numéricos (3,4,5 o 3-6), confirmar la venta y visualizar el resumen final con precio bruto, descuento aplicado y total neto. El sistema actualiza automáticamente los asientos vendidos y mantiene la integridad de la información en memoria. En la sección de reportes es posible verificar la cantidad de asientos vendidos, disponibles y los ingresos generados.
+
+Las principales validaciones incluyen el control del máximo de seis asientos por venta, la verificación de que los asientos existan dentro del plano, la prevención de duplicados, el control del stock disponible y la conservación de la consistencia del mapa de ocupación. Si ocurre un error durante la venta, el sistema revierte la operación para mantener los datos íntegros.
+
+La arquitectura interna está basada en arreglos de objetos Cliente, Venta, Asiento y listas dinámicas de Evento. Cada venta vincula el evento, el cliente, los asientos seleccionados, la fecha y los valores correspondientes (bruto, descuento y neto). El sistema traduce cada etiqueta de asiento (por ejemplo, A1 o H12) a un identificador numérico utilizando una fórmula basada en el índice de fila y columna. También dispone de funciones para mostrar el plano con identificadores y seleccionar automáticamente asientos contiguos disponibles.
+
+Entre las posibles mejoras futuras se contempla la implementación de persistencia en archivos JSON o base de datos, la exportación de reportes en formato CSV, la integración de pruebas unitarias (JUnit5) y la incorporación de soporte multilenguaje (español/inglés).
+
+El proyecto fue desarrollado por SR. JHANS (Jhans92). No se incluye licencia explícita, aunque se recomienda la adopción de licencia MIT en caso de publicación abierta del código.
